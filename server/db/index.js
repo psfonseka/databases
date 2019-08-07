@@ -15,3 +15,4 @@ dbConnection.connect((err) => {
 });
 
 
+module.exports = dbConnection;

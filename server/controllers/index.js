@@ -3,12 +3,11 @@ var models = require('../models');
 module.exports = {
   messages: {
     get: function (req, res) {
-      console.log("get request");
-      models.messages.get;
+      //console.log(req);
+      let data = models.messages.get();
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log("get request");
-      models.messages.post;
+      models.messages.post();
     }, // a function which handles posting a message to the database
     options: function(req, res) {
       console.log("options request");
