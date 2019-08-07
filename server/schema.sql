@@ -11,12 +11,20 @@ CREATE TABLE messages (
   PRIMARY KEY (MessageID)
 );
 
+CREATE TABLE users (
+  username varchar(50) NOT NULL,
+  PRIMARY KEY (username)
+);
+
 /* Create other tables and define schemas for them here! */
 INSERT INTO messages
 VALUES (-1, 'Anonymous', 'lobby', 'This is the first message!');
 
 INSERT INTO messages
 VALUES (0, 'Anonymous', 'lobby', 'This is the second message!');
+
+INSERT INTO users
+VALUES ('Anonymous');
 
 
 
