@@ -5,16 +5,17 @@ module.exports = {
     get: function (req, res) {
       db.query("SELECT * FROM messages", function (err, result, fields) {
         if (err) throw err;
-        //console.log(JSON.stringify({results: result}));
         res.type('json');
-        //console.log(JSON.stringify({results: [{messageID: 0, text: "yikes", username: "bob", roomname: "lobby"}]}));
-        //res.send(JSON.stringify({results: [{messageID: 0, text: "this is the first message!", username: "bob", roomname: "lobby"}]}));
-        //res.type('json');
-        res.send(JSON.stringify({results: result}));
+        res.send(JSON.stringify({results: result.slice().reverse()}));
       });
     }, // a function which produces all the messages
     post: function (req, res) {
-      console.log("post request123");
+      let msg = req.body;
+      db.query("INSERT INTO messages VALUES (NULL, " + db.escape(msg.username) + ", " + db.escape(msg.roomname) + ", " + db.escape(msg.text) + ")", function (err, result, fields) {
+        if (err) throw err;
+        res.type('json');
+        res.send(JSON.stringify("Inserted succesfully!"));
+      });
     } // a function which can be used to insert a message into the database
   },
 

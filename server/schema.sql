@@ -15,6 +15,10 @@ CREATE TABLE messages (
 INSERT INTO messages
 VALUES (-1, 'Anonymous', 'lobby', 'This is the first message!');
 
+INSERT INTO messages
+VALUES (0, 'Anonymous', 'lobby', 'This is the second message!');
+
+
 
 
 /*  Execute this file from the command line by typing:
