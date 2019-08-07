@@ -3,8 +3,9 @@ var models = require('../models');
 module.exports = {
   messages: {
     get: function (req, res) {
-      //console.log(req);
-      let data = models.messages.get();
+      models.messages.get(req, res);
+      //res.type('json');
+      //res.send(JSON.stringify({results: [{text: "yikes", username: "bob", roomname: "lobby"}]}));
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       models.messages.post();
