@@ -1,6 +1,6 @@
 var db = require('../db');
 var Sequelize = require('sequelize');
-var nb = new Sequelize('chat', 'root', 'students');
+var nb = new Sequelize('chat', 'root', 'students', { logging: false });
 
 var User = nb.define('user', {
   username: {
