@@ -3,10 +3,10 @@
 // with and manipulate the data.
 
 var Messages = {
-  
+
   _data: [],
 
-  addTo: function(values) {  
+  addTo: function(values) {
     this._data = values;
     for (let i = 0; i < this._data.length; i++) {
       this._data[i].text = this._data[i].text || '';
