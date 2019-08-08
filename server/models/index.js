@@ -27,7 +27,6 @@ module.exports = {
     },
     post: function (req, callback) {
       let user = req.body;
-      console.log(user);
       db.query("INSERT INTO users VALUES (" + db.escape(user.username) + ")", (err, result) => {
         if (err) throw err;
         callback(null, result);

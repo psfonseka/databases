@@ -20,7 +20,10 @@ describe('Persistent Node Chat Server', function() {
 
     /* Empty the db table before each test so that multiple tests
      * (or repeated runs of the tests) won't screw each other up: */
-    dbConnection.query('truncate ' + tablename, done);
+    dbConnection.query('truncate ' + tablename);
+
+    var tableusers = "users";
+    dbConnection.query('truncate ' + tableusers, done);
   });
 
   afterEach(function() {
@@ -40,7 +43,7 @@ describe('Persistent Node Chat Server', function() {
         uri: 'http://127.0.0.1:3000/classes/messages',
         json: {
           username: 'Valjean',
-          message: 'In mercy\'s name, three days is all I need.',
+          text: 'In mercy\'s name, three days is all I need.',
           roomname: 'Hello'
         }
       }, function () {
@@ -51,7 +54,7 @@ describe('Persistent Node Chat Server', function() {
         // your message table, since this is schema-dependent.
         var queryString = 'SELECT * FROM messages';
         var queryArgs = [];
-
+        console.log("hi");
         dbConnection.query(queryString, queryArgs, function(err, results) {
           // Should have one result:
           expect(results.length).to.equal(1);
