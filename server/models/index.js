@@ -19,11 +19,19 @@ module.exports = {
 
   users: {
     // Ditto as above.
-    get: function (req, res) {
-
+    get: function (callback) {
+      db.query("SELECT * FROM users", (err, result) => {
+        if (err) throw err;
+        callback(null, result);
+      });
     },
-    post: function (req, res) {
-
+    post: function (req, callback) {
+      let user = req.body;
+      console.log(user);
+      db.query("INSERT INTO users VALUES (" + db.escape(user.username) + ")", (err, result) => {
+        if (err) throw err;
+        callback(null, result);
+      });
     }
   }
 };

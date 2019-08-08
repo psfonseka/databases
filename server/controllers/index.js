@@ -26,12 +26,20 @@ module.exports = {
   users: {
     // Ditto as above
     get: function (req, res) {
-      console.log("post request");
-      models.users.get(req, res);
+      models.users.get((err, data) => {
+        if (err) throw err;
+        res.type('json');
+        res.statusCode = 200;
+        res.send(JSON.stringify({users: data}));
+      });
     },
     post: function (req, res) {
-      console.log("post request");
-      models.users.post(req, res);
+      models.users.post(req, (err, data) => {
+        if(err) throw err;
+        res.type('json');
+        res.statusCode = 201;
+        res.send(JSON.stringify("Inserted succesfully!"));
+      });
     }
   }
 };
