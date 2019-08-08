@@ -51,17 +51,33 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function (callback) {
-      db.query("SELECT * FROM users", (err, result) => {
-        if (err) throw err;
-        callback(null, result);
+      let res = [];
+      User.sync()
+      .then(function() {
+        return User.findAll({});
+      })
+      .then(function(users) {
+        users.forEach(function(users) {
+          res.push(users.dataValues);
+        });
+        callback(null, res);
+      })
+      .catch(function(err) {
+        console.log(err);
       });
     },
     post: function (req, callback) {
       let user = req.body;
-      db.query("INSERT INTO users VALUES (" + db.escape(user.username) + ")", (err, result) => {
-        if (err) throw err;
-        callback(null, result);
-      });
+      User.sync()
+        .then(function() {
+          return User.create({username: user.username});
+        })
+        .then(function() {
+          callback(null);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
   }
 };
