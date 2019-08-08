@@ -11,7 +11,7 @@ module.exports = {
       });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      models.messages.post(req, (err, data) => {
+      models.messages.post(req, (err) => {
         if(err) throw err;
         res.type('json');
         res.statusCode = 201;
