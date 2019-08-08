@@ -18,30 +18,46 @@ var User = db.define('User', {
 });
 
 var Message = db.define('Message', {
-  username: Sequelize.INTEGER,
+  username: Sequelize.STRING,
   text: Sequelize.STRING,
   roomname: Sequelize.STRING
 });
 
 /* Sequelize comes with built in support for promises
  * making it easy to chain asynchronous operations together */
-User.sync()
+Message.sync()
   .then(function() {
-    // Now instantiate an object and save it:
-    return User.create({username: 'Jean Valjean'});
+    return Message.create({username: 'Jean Valjean', roomname: 'lobby', text: 'Men like you don\'t change'});
   })
   .then(function() {
-    // Retrieve objects from the database:
-    return User.findAll({ where: {username: 'Jean Valjean'} });
+    return Message.findAll({ where: {username: 'Jean Valjean'} });
   })
-  .then(function(users) {
-    users.forEach(function(user) {
-      console.log(user.username + ' exists');
+  .then(function(messages) {
+    messages.forEach(function(message) {
+      console.log(message);
     });
-    db.close();
   })
   .catch(function(err) {
-    // Handle any error in the chain
-    console.error(err);
+    console.log(err);
     db.close();
-  });
+  })
+// User.sync()
+//   .then(function() {
+//     // Now instantiate an object and save it:
+//     return User.create({username: 'Jean Valjean'});
+//   })
+//   .then(function() {
+//     // Retrieve objects from the database:
+//     return User.findAll({ where: {username: 'Jean Valjean'} });
+//   })
+//   .then(function(users) {
+//     users.forEach(function(user) {
+//       console.log(user.username + ' exists');
+//     });
+//     db.close();
+//   })
+//   .catch(function(err) {
+//     // Handle any error in the chain
+//     console.error(err);
+//     db.close();
+//   });
